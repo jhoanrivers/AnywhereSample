@@ -43,3 +43,23 @@ data class TaskModel (
         @SerializedName("highPriority")
         val highPriority: Boolean,
         )
+
+
+data class CreatedBy(
+
+        @SerializedName("firstName")
+        val firstName: String,
+
+        @SerializedName("lastName")
+        val lastName: String,
+
+        @SerializedName("nickName")
+        val nickName: String,
+
+        @SerializedName("id")
+        val id: String,
+
+        @SerializedName("avatar")
+        val avatar: String
+
+)

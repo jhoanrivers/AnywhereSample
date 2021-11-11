@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a3dolphinsextra.Adapter.TaskAdapter
 import com.example.a3dolphinsextra.R
@@ -46,12 +47,12 @@ class TaskFragment : Fragment() {
         binding = FragmentTaskBinding.inflate(inflater, container, false)
         val v = binding.root
         binding.rvListTask.layoutManager = LinearLayoutManager(activity)
-        modelViewTask.doSetToken(arguments)
-        modelViewTask.getListTask()
+        modelViewTask = ViewModelProvider(this).get(TaskModelView::class.java)
         modelViewTask.mutableListTask.observe(this, Observer {
             adapter = TaskAdapter(it)
             binding.rvListTask.adapter = adapter
         })
+        modelViewTask.getListTask(arguments!!.getString("token","token"))
         return v
     }
 

@@ -14,14 +14,10 @@ class TaskModelView: ViewModel() {
 
     var mutableListTask: MutableLiveData<List<TaskModel>>  = MutableLiveData()
     lateinit var listTask: List<TaskModel>
-    var token: String = ""
 
-    fun doSetToken(value: String){
-        token = value
-    }
-
-    fun getListTask(){
-        NetworkConfig().getService().getListTask("desc",0,10,"alltask","status",token)
+    fun getListTask(token: String){
+        var newToken = "Bearer $token"
+        NetworkConfig().getService().getListTask("desc",0,10,"alltask","status",newToken)
             .enqueue(object: Callback<TaskListResponse>{
                 override fun onResponse(
                     call: Call<TaskListResponse>,
