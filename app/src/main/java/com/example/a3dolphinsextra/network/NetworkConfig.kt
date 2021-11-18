@@ -10,31 +10,37 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NetworkConfig {
 
 
-    fun getInterceptor(): OkHttpClient {
 
-        val logging =  HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BODY
+    companion object {
+
+        fun getInterceptor(): OkHttpClient {
+
+            val logging =  HttpLoggingInterceptor()
+            logging.level = HttpLoggingInterceptor.Level.BODY
 
 
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .build()
+            val okHttpClient = OkHttpClient.Builder()
+                    .addInterceptor(logging)
+                    .build()
 
-        return okHttpClient
+            return okHttpClient
+        }
+
+
+        fun getRetrofit(): Retrofit {
+
+            return Retrofit.Builder()
+                    .baseUrl(GlobalClass.serverUrl)
+                    .client(getInterceptor())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
+        }
+
+        fun getService() = getRetrofit().create(NetworkService::class.java)
+
+
     }
-
-
-    fun getRetrofit(): Retrofit {
-
-        return Retrofit.Builder()
-            .baseUrl(GlobalClass.serverUrl)
-            .client(getInterceptor())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-    }
-
-    fun getService() = getRetrofit().create(NetworkService::class.java)
 
 
 }

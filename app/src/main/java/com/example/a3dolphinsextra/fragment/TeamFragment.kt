@@ -1,11 +1,8 @@
 package com.example.a3dolphinsextra.fragment
 
 import android.app.Dialog
-import android.app.ProgressDialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,20 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a3dolphinsextra.Adapter.ContactAdapter
 import com.example.a3dolphinsextra.R
+import com.example.a3dolphinsextra.global.prefs
 import com.example.a3dolphinsextra.model.ContactModel
 import com.example.a3dolphinsextra.model.ContactResponse
 import com.example.a3dolphinsextra.network.NetworkConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 import java.lang.Exception
 
 private const val TOKEN = "token"
@@ -70,8 +64,8 @@ class TeamFragment : Fragment() {
     }
 
     private fun getListContact() {
-        val token: String = "Bearer " +arguments!!.getString(TOKEN)
-        NetworkConfig().getService().getContacts(token).enqueue(object : Callback<ContactResponse>{
+        val token: String = "Bearer " + prefs.token
+        NetworkConfig.getService().getContacts(token).enqueue(object : Callback<ContactResponse>{
             override fun onResponse(
                     call: Call<ContactResponse>, response: Response<ContactResponse>) {
                 var listContact: List<ContactModel> = response.body()?.data ?: listOf<ContactModel>()

@@ -44,5 +44,12 @@ interface NetworkService {
     ): Call<ContactResponse>
 
 
+    @Headers("Accept: application/json")
+    @POST("/dolphin/apiv1/graph/users/mobile/session")
+    fun doLogin(
+            @Body data: Map<String, String>,
+            @Header("Authorization") token: String,
+    ) : Call<UserResponse>
+
 
 }

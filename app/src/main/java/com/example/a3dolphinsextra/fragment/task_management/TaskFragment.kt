@@ -1,7 +1,6 @@
 package com.example.a3dolphinsextra.fragment.task_management
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a3dolphinsextra.Adapter.TaskAdapter
-import com.example.a3dolphinsextra.R
 import com.example.a3dolphinsextra.databinding.FragmentTaskBinding
-import com.example.a3dolphinsextra.model.TaskListResponse
-import com.example.a3dolphinsextra.model.TaskModel
-import com.example.a3dolphinsextra.network.NetworkConfig
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class TaskFragment : Fragment() {
 
@@ -52,7 +44,7 @@ class TaskFragment : Fragment() {
             adapter = TaskAdapter(it)
             binding.rvListTask.adapter = adapter
         })
-        modelViewTask.getListTask(arguments!!.getString("token","token"))
+        modelViewTask.getListTask()
         return v
     }
 

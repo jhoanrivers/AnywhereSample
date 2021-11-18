@@ -1,7 +1,8 @@
-package com.example.a3dolphinsextra
+package com.example.a3dolphinsextra.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.a3dolphinsextra.R
 
 class SpashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

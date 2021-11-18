@@ -1,8 +1,9 @@
-package com.example.a3dolphinsextra
+package com.example.a3dolphinsextra.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.a3dolphinsextra.R
 import com.example.a3dolphinsextra.fragment.*
 import com.example.a3dolphinsextra.fragment.task_management.TaskFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,8 +23,8 @@ class HomeActivity : AppCompatActivity() {
 
         val homeFragment = HomeFragment()
         val priorityFragment = PriorityFragment()
-        val teamFragment = token?.let { TeamFragment.newInstance(it) }
-        val taskFragment = token?.let { TaskFragment.newInstance(it) }
+        val teamFragment = TeamFragment()
+        val taskFragment = TaskFragment()
         val profileFragment = ProfileFragment()
         bottomNav = findViewById(R.id.btnNavView)
 
