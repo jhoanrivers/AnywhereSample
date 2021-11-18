@@ -16,11 +16,12 @@ import retrofit2.Response
 class LoginViewModel: ViewModel() {
 
 
-    fun dologin(
+
+    suspend fun doLogin(
             email: String,
             password: String
-    ): Boolean {
-        var result: Boolean = false
+    ): String {
+        var result: String = ""
 
         GlobalScope.launch {
             suspend {
@@ -28,17 +29,16 @@ class LoginViewModel: ViewModel() {
                         .enqueue(object: Callback<AuthResponse>{
 
                             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                                var mobileSession: Boolean = getMobileSession(email, password, response.body()!!.token)
-                                result = mobileSession
+                                result = response.body()!!.token
                             }
                             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                                 Log.d("Auth Response", t.localizedMessage)
-                                result = false
+                                result = "Wrong username or password"
                             }
                         });
             }.invoke()
         }
-
+        return result
     }
 
 

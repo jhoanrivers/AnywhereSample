@@ -12,6 +12,8 @@ import com.example.a3dolphinsextra.global.prefs
 import com.example.a3dolphinsextra.model.AuthResponse
 import com.example.a3dolphinsextra.model.LoginModel
 import com.example.a3dolphinsextra.network.NetworkConfig
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +41,12 @@ class LoginActivity : AppCompatActivity() {
         password = binding.passwordTxt.text.toString()
 
         binding.loginBtn.setOnClickListener {
-            var response: Boolean = loginViewModel.dologin(email, password)
+
+            GlobalScope.launch {
+                var response: String = loginViewModel.doLogin(email, password)
+            }
+
+
             if (response) {
                 val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                 startActivity(intent)
